@@ -12,7 +12,7 @@ export default function SelectedAddOnsModal({
   onClose: () => void;
   onUpdate: (addons: any[]) => void;
 }) {
-  const { selectedAddOns } = usePlanContext();
+  const { selectedAddOns } = usePlan();
   const [localAddOns, setLocalAddOns] = useState<any[]>([]);
   const [hasChanges, setHasChanges] = useState(false);
 

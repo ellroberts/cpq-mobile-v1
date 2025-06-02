@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import AddOnCards from "../components/AddOnCards";
 import { AddOnFiltersPanel } from "../components/AddOnFiltersPanel";
-import { FooterNav } from "../components/FooterNav";
-import SelectedAddOnsModal from "../components/SelectedAddOnsModal";
 import { usePlan } from "../context/PlanContext";
 import { addOnData } from "../mobileData/addOnData";
 
@@ -39,13 +37,8 @@ export default function AddOns() {
     });
   };
 
-  const { isModalOpen, setIsModalOpen, setSelectedAddOns, selectedAddOns } =
-    usePlan();
+  const { setSelectedAddOns, selectedAddOns } = usePlan();
 
-  const handleUpdate = (updated) => {
-    setSelectedAddOns(updated);
-    setIsModalOpen(false);
-  };
 
   const filteredAddOns = addOnData.filter((addon) => {
     const match = (key) =>
@@ -89,15 +82,6 @@ export default function AddOns() {
         </main>
       </div>
 
-      <SelectedAddOnsModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onUpdate={handleUpdate}
-      />
-      <FooterNav
-        onBack={() => history.back()}
-        onContinue={() => alert("Continuing...")}
-      />
     </div>
   );
 }

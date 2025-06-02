@@ -20,8 +20,7 @@ export default function MobilePlans() {
   const {
     selectedPlans,
     togglePlan,
-    isModalOpen,
-    setIsModalOpen,
+    
     setSelectedPlans,
     setFooter,
   } = usePlan();
@@ -82,9 +81,6 @@ export default function MobilePlans() {
 
   const selectedPlanObjects = selectedPlans;
 
-  const handleModalUpdate = (updatedPlans) => {
-    setSelectedPlans(updatedPlans);
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
@@ -117,12 +113,6 @@ export default function MobilePlans() {
         </section>
       </main>
 
-      <SelectedPlansModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        plans={selectedPlanObjects}
-        onUpdate={handleModalUpdate}
-      />
     </div>
   );
 }
