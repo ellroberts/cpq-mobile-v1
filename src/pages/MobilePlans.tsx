@@ -4,6 +4,16 @@ import { MobilePlanCards } from "../components/MobilePlanCards";
 import { SelectedPlansModal } from "../components/SelectedPlansModal";
 import { mobilePlanData } from "../mobileData/mobilePlanData";
 import { usePlan } from "../context/PlanContext";
+import {
+  faMobileAlt,
+  faLaptop,
+  faNetworkWired,
+  faPhone,
+  faHeadset,
+  faCode,
+  faWifi,
+  faCloud,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function MobilePlans() {
   const [selectedFilters, setSelectedFilters] = useState({

@@ -1,37 +1,46 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMobileAlt,
+  faTrash,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
-import React from "react";
-import classNames from "classnames";
-
-interface Props {
-  id: string;
-  name: string;
-  isSelected: boolean;
-  onToggle: () => void;
-}
-
-export default function ServiceCard({ id, name, isSelected, onToggle }: Props) {
+export default function ServiceCard({
+  id,
+  name,
+  description,
+  icon,
+  isSelected,
+  onToggle,
+}) {
   return (
-    <div
-      onClick={onToggle}
-      className={classNames(
-        "border rounded-lg p-4 cursor-pointer shadow-sm transition-all",
-        {
-          "border-blue-600 bg-blue-50": isSelected,
-          "hover:shadow-md": true
-        }
-      )}
-    >
-      <div className="text-lg font-medium mb-2">{name}</div>
+    <div className="border rounded-lg p-6 bg-white text-center shadow-sm flex flex-col items-center space-y-4">
+      {/* Icon */}
+      <FontAwesomeIcon icon={icon} className="text-4xl text-gray-600" />
+
+      {/* Title */}
+      <h3 className="text-lg font-semibold">{name}</h3>
+
+      {/* Description */}
+      <p className="text-sm text-gray-500">{description}</p>
+
+      {/* Add/Remove button */}
       <button
-        className={classNames(
-          "w-full text-sm py-1 px-2 rounded border transition",
-          {
-            "bg-blue-600 text-white": isSelected,
-            "bg-gray-100 text-gray-700": !isSelected
-          }
-        )}
+        onClick={onToggle}
+        className={`w-full text-sm py-2 rounded transition ${
+          isSelected
+            ? "bg-blue-600 text-white hover:bg-blue-700"
+            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+        }`}
       >
-        {isSelected ? "Remove" : "+ Add"}
+        {isSelected ? (
+          "Remove"
+        ) : (
+          <>
+            <FontAwesomeIcon icon={faPlus} className="mr-2" />
+            Add
+          </>
+        )}
       </button>
     </div>
   );

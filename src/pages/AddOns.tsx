@@ -3,6 +3,16 @@ import AddOnCards from "../components/AddOnCards";
 import { AddOnFiltersPanel } from "../components/AddOnFiltersPanel";
 import { usePlan } from "../context/PlanContext";
 import { addOnData } from "../mobileData/addOnData";
+import {
+  faMobileAlt,
+  faLaptop,
+  faNetworkWired,
+  faPhone,
+  faHeadset,
+  faCode,
+  faWifi,
+  faCloud,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function AddOns() {
   const [selectedFilters, setSelectedFilters] = useState({
