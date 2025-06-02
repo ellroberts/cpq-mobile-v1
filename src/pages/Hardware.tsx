@@ -1,6 +1,6 @@
 import React from "react";
 import { hardwareData } from "../mobileData/hardwareData";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
 import FooterNav from "../components/FooterNav";
 
 export default function Hardware() {
@@ -10,7 +10,7 @@ export default function Hardware() {
     clearHardware,
     isModalOpen,
     setIsModalOpen,
-  } = usePlanContext();
+  } = usePlan();
 
   const handleQtyChange = (id, name, price, description, qty) => {
     updateHardware({ id, name, price, description }, qty);

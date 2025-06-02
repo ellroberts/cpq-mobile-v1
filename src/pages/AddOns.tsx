@@ -3,7 +3,7 @@ import AddOnCards from "../components/AddOnCards";
 import { AddOnFiltersPanel } from "../components/AddOnFiltersPanel";
 import { FooterNav } from "../components/FooterNav";
 import SelectedAddOnsModal from "../components/SelectedAddOnsModal";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
 import { addOnData } from "../mobileData/addOnData";
 
 export default function AddOns() {
@@ -40,7 +40,7 @@ export default function AddOns() {
   };
 
   const { isModalOpen, setIsModalOpen, setSelectedAddOns, selectedAddOns } =
-    usePlanContext();
+    usePlan();
 
   const handleUpdate = (updated) => {
     setSelectedAddOns(updated);

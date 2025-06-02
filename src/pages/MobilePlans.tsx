@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiltersPanel } from "../components/FiltersPanel";
 import { MobilePlanCards } from "../components/MobilePlanCards";
 import { SelectedPlansModal } from "../components/SelectedPlansModal";
 import { mobilePlanData } from "../mobileData/mobilePlanData";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
 
 export default function MobilePlans() {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -23,7 +23,15 @@ export default function MobilePlans() {
     isModalOpen,
     setIsModalOpen,
     setSelectedPlans,
-  } = usePlanContext();
+    setFooter,
+  } = usePlan();
+
+  useEffect(() => {
+    setFooter({
+      disableContinue: selectedPlans.length === 0,
+      continueLabel: `Continue (${selectedPlans.length} selected)`,
+    });
+  }, [selectedPlans, setFooter]);
 
   const handleClearAll = () => {
     setSelectedPlans([]);
@@ -72,7 +80,7 @@ export default function MobilePlans() {
       : getPrice(b) - getPrice(a);
   });
 
-  const selectedPlanObjects = selectedPlans; // ✅ directly use full plan objects
+  const selectedPlanObjects = selectedPlans;
 
   const handleModalUpdate = (updatedPlans) => {
     setSelectedPlans(updatedPlans);

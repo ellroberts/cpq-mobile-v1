@@ -3,11 +3,11 @@ import {
   Routes,
   Route,
   Navigate,
-} from 'react-router-dom';
-import Layout from './components/Layout';
-import MobileSelection from './pages/MobileSelection';
-import MobilePlans from './pages/MobilePlans';
-import AddOns from './pages/AddOns';
+} from "react-router-dom";
+import Layout from "./components/Layout";
+import MobileSelection from "./pages/MobileSelection";
+import MobilePlans from "./pages/MobilePlans";
+import AddOns from "./pages/AddOns";
 
 export default function App() {
   return (

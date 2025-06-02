@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 export interface AddOn {
@@ -16,6 +17,11 @@ export interface Plan {
   [key: string]: any;
 }
 
+interface FooterState {
+  disableContinue: boolean;
+  continueLabel: string;
+}
+
 interface PlanContextType {
   selectedPlans: Plan[];
   setSelectedPlans: (plans: Plan[]) => void;
@@ -24,44 +30,43 @@ interface PlanContextType {
   setIsModalOpen: (open: boolean) => void;
   selectedAddOns: AddOn[];
   setSelectedAddOns: (addons: AddOn[]) => void;
-  updateAddOn: (addon: Omit<AddOn, "quantity">, quantity: number) => void;
-  clearAddOns: () => void;
+  selectedServices: string[];
+  setSelectedServices: (services: string[]) => void;
+  footer: FooterState;
+  setFooter: (footer: FooterState) => void;
 }
 
-const PlanContext = createContext<PlanContextType | undefined>(undefined);
+const PlanContext = createContext<PlanContextType>({
+  selectedPlans: [],
+  setSelectedPlans: () => {},
+  togglePlan: () => {},
+  isModalOpen: false,
+  setIsModalOpen: () => {},
+  selectedAddOns: [],
+  setSelectedAddOns: () => {},
+  selectedServices: [],
+  setSelectedServices: () => {},
+  footer: { disableContinue: true, continueLabel: "Continue" },
+  setFooter: () => {},
+});
 
-export const PlanProvider = ({ children }: { children: ReactNode }) => {
+export function PlanProvider({ children }: { children: ReactNode }) {
   const [selectedPlans, setSelectedPlans] = useState<Plan[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAddOns, setSelectedAddOns] = useState<AddOn[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [footer, setFooter] = useState<FooterState>({
+    disableContinue: true,
+    continueLabel: "Continue",
+  });
 
   const togglePlan = (plan: Plan) => {
-    setSelectedPlans((prev) => {
-      const exists = prev.find((p) => String(p.id) === String(plan.id));
-      if (exists) {
-        return prev.filter((p) => String(p.id) !== String(plan.id));
-      }
-      return [...prev, plan];
-    });
+    if (selectedPlans.find((p) => p.id === plan.id)) {
+      setSelectedPlans(selectedPlans.filter((p) => p.id !== plan.id));
+    } else {
+      setSelectedPlans([...selectedPlans, plan]);
+    }
   };
-
-  const updateAddOn = (addon: Omit<AddOn, "quantity">, quantity: number) => {
-    setSelectedAddOns((prev) => {
-      const existing = prev.find((a) => a.id === addon.id);
-      if (quantity === 0) {
-        return prev.filter((a) => a.id !== addon.id);
-      }
-      if (existing) {
-        return prev.map((a) =>
-          a.id === addon.id ? { ...a, quantity } : a
-        );
-      } else {
-        return [...prev, { ...addon, quantity }];
-      }
-    });
-  };
-
-  const clearAddOns = () => setSelectedAddOns([]);
 
   return (
     <PlanContext.Provider
@@ -73,19 +78,15 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
         setIsModalOpen,
         selectedAddOns,
         setSelectedAddOns,
-        updateAddOn,
-        clearAddOns,
+        selectedServices,
+        setSelectedServices,
+        footer,
+        setFooter,
       }}
     >
       {children}
     </PlanContext.Provider>
   );
-};
+}
 
-export const usePlanContext = (): PlanContextType => {
-  const context = useContext(PlanContext);
-  if (!context) {
-    throw new Error("usePlanContext must be used within a PlanProvider");
-  }
-  return context;
-};
+export const usePlan = () => useContext(PlanContext);
