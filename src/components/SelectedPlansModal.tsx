@@ -3,12 +3,6 @@ import type { MobilePlan } from "../mobileData/mobilePlanData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-// Load logos from src/assets/
-const logos = import.meta.glob("../assets/*-logo.png", {
-  eager: true,
-  as: "url",
-});
-
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -49,8 +43,10 @@ export function SelectedPlansModal({
         <h2 className="text-xl font-semibold mb-4">Selected Plans</h2>
         <ul className="space-y-3 mb-6">
           {localPlans.map((plan) => {
-            const path = `../assets/${plan.network.toLowerCase()}-logo.png`;
-            const logoSrc = logos[path] as string;
+            // Correctly formatted logo path
+            const logoSrc = `/assets/${plan.network
+              .toLowerCase()
+              .replace(/\s+/g, "-")}-logo.png`;
 
             return (
               <li
@@ -58,11 +54,7 @@ export function SelectedPlansModal({
                 className="border border-gray-200 rounded p-3 text-sm flex items-center justify-between"
               >
                 <div className="flex items-center space-x-3">
-                  {logoSrc ? (
-                    <img src={logoSrc} alt={plan.network} className="w-6 h-6" />
-                  ) : (
-                    <div className="w-6 h-6 bg-gray-200 rounded" />
-                  )}
+                  <img src={logoSrc} alt={plan.network} className="w-6 h-6" />
                   <span className="font-medium">{plan.name}</span>
                 </div>
 
