@@ -1,6 +1,6 @@
 import React from "react";
 import AddOnCard from "./AddOnCard";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext"; // ✅ fixed
 
 type AddOn = {
   id: string;
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export default function AddOnCards({ addOns, selectedFilters }: Props) {
-  const { selectedAddOns, setSelectedAddOns } = usePlanContext();
+  const { selectedAddOns, setSelectedAddOns } = usePlan(); // ✅ fixed
 
   if (!Array.isArray(addOns)) {
     console.warn("🚨 AddOnCards: addOns is undefined or not an array");

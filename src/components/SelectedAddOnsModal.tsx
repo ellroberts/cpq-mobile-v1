@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,7 +12,7 @@ export default function SelectedAddOnsModal({
   onClose: () => void;
   onUpdate: (addons: any[]) => void;
 }) {
-  const { selectedAddOns } = usePlanContext();
+  const { selectedAddOns } = usePlan();
   const [localAddOns, setLocalAddOns] = useState<any[]>([]);
   const [hasChanges, setHasChanges] = useState(false);
 

@@ -1,7 +1,17 @@
 import React from "react";
 import { hardwareData } from "../mobileData/hardwareData";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
 import FooterNav from "../components/FooterNav";
+import {
+  faMobileAlt,
+  faLaptop,
+  faNetworkWired,
+  faPhone,
+  faHeadset,
+  faCode,
+  faWifi,
+  faCloud,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Hardware() {
   const {
@@ -10,7 +20,7 @@ export default function Hardware() {
     clearHardware,
     isModalOpen,
     setIsModalOpen,
-  } = usePlanContext();
+  } = usePlan();
 
   const handleQtyChange = (id, name, price, description, qty) => {
     updateHardware({ id, name, price, description }, qty);

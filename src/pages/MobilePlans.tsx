@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiltersPanel } from "../components/FiltersPanel";
 import { MobilePlanCards } from "../components/MobilePlanCards";
 import { SelectedPlansModal } from "../components/SelectedPlansModal";
 import { mobilePlanData } from "../mobileData/mobilePlanData";
-import { usePlanContext } from "../context/PlanContext";
+import { usePlan } from "../context/PlanContext";
+import {
+  faMobileAlt,
+  faLaptop,
+  faNetworkWired,
+  faPhone,
+  faHeadset,
+  faCode,
+  faWifi,
+  faCloud,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function MobilePlans() {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -20,10 +30,17 @@ export default function MobilePlans() {
   const {
     selectedPlans,
     togglePlan,
-    isModalOpen,
-    setIsModalOpen,
+    
     setSelectedPlans,
-  } = usePlanContext();
+    setFooter,
+  } = usePlan();
+
+  useEffect(() => {
+    setFooter({
+      disableContinue: selectedPlans.length === 0,
+      continueLabel: `Continue (${selectedPlans.length} selected)`,
+    });
+  }, [selectedPlans, setFooter]);
 
   const handleClearAll = () => {
     setSelectedPlans([]);
@@ -72,11 +89,8 @@ export default function MobilePlans() {
       : getPrice(b) - getPrice(a);
   });
 
-  const selectedPlanObjects = selectedPlans; // ✅ directly use full plan objects
+  const selectedPlanObjects = selectedPlans;
 
-  const handleModalUpdate = (updatedPlans) => {
-    setSelectedPlans(updatedPlans);
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 font-sans">
@@ -109,12 +123,6 @@ export default function MobilePlans() {
         </section>
       </main>
 
-      <SelectedPlansModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        plans={selectedPlanObjects}
-        onUpdate={handleModalUpdate}
-      />
     </div>
   );
 }

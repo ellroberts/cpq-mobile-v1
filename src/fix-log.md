@@ -30,6 +30,7 @@
 | v12.1   | Recovery.                                     | 25 May 2025 |
 | v12.2   | Recovery.                                     | 26 May 2025 |
 | v13.0   | Tidy up from recovery                         | 26 May 2025 |
+| v14.0   | Adding mobile selection page                  | 02 May 2025 |
 
 ---
 
@@ -723,8 +724,6 @@ Milestone was paused with Tailwind partially rendering but not applying to route
 ### 🎯 Goal  
 Resolve Tailwind styling issue in StackBlitz and complete layout fixes left open from v13.5 (Cards, Filter Panel, Page Layouts).
 
----
-
 ### 🔄 Fixes & Updates
 
 - [ ] Verified GitHub repo integration from StackBlitz
@@ -737,8 +736,6 @@ Resolve Tailwind styling issue in StackBlitz and complete layout fixes left open
 - [ ] (TO DO) Confirm `bg-gray-50`, `rounded`, `shadow` etc. are output
 - [ ] (TO DO) Test Tailwind purge logic — ensure it's not stripping needed classes
 
----
-
 ### 🧪 Validation
 - [ ] Visually confirm cards render styled and structured in browser
 - [ ] Console log Tailwind classes if needed to confirm they're not stripped
@@ -746,3 +743,20 @@ Resolve Tailwind styling issue in StackBlitz and complete layout fixes left open
 - [ ] test 1,2,3, 4, 5
 
 ---
+
+## [v14.0] – 2025-06-02
+
+### 🎯 Goal  
+Include the Mobile selection page
+
+### 🔄 Fixes & Updates
+
+- Added a ServiceCard.tsx page
+- Updated the PlanContext
+- Updated the MobileSelection page
+- Added the serviceOptions.ts file
+- Restructed the footer nav so it's now a global soltion
+- moved images to public folder
+
+### ⏭️ Next Steps
+- Have changed the image paths and now the images aren't loading in the selection plans modal
