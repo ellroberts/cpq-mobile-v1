@@ -1,16 +1,22 @@
-# CPQ Mobile – v1.0
+# CPQ Mobile V1
 
-✅ First working setup in StackBlitz  
-✅ TailwindCSS successfully installed and rendering  
-✅ Components, context, and pages restored  
-✅ Routing functional via `react-router-dom`
+A responsive React + Vite + Tailwind web application for configuring mobile plans and optional add-ons. This tool allows users to filter, compare, and select mobile plans, with a seamless multi-step flow and live summary.
 
-## StackBlitz URL
+## 🔧 Tech Stack
 
-https://stackblitz.com/edit/cpq-mobile-v1
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/) (optional — check current setup)
+- [Font Awesome](https://fontawesome.com/)
+- Context API for global state management
 
-## Next Steps
+---
 
-- Move assets into `/src/assets/`
-- Create milestone branches for add-ons page and footerNav
-- Begin milestone v1.1 enhancements
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/ellroberts/cpq-mobile-v1.git
+cd cpq-mobile-v1

@@ -31,6 +31,7 @@
 | v12.2   | Recovery.                                     | 26 May 2025 |
 | v13.0   | Tidy up from recovery                         | 26 May 2025 |
 | v14.0   | Adding mobile selection page                  | 02 May 2025 |
+| v14.1   | Moving assets folder                          | 03 May 2025 |
 
 ---
 
@@ -760,3 +761,17 @@ Include the Mobile selection page
 
 ### ⏭️ Next Steps
 - Have changed the image paths and now the images aren't loading in the selection plans modal
+
+---
+
+## [v14.1] – 2025-06-03
+
+### 🎯 Goal  
+Move assets folder to public
+
+### 🔄 Fixes & Updates
+
+- Need to update files that reference the assets
+
+### ⏭️ Next Steps
+- Currently have assets duplicated where only the modal is connected to the folder in public, the page view is still connected to the src folder.
