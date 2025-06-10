@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 export default function CommentPopup({ comment, onSave, onDelete, onClose }) {
   const [text, setText] = useState(comment?.text || '');
   const ref = useRef();
+  const isNew = !comment.text;
 
   useEffect(() => {
     ref.current?.focus();
@@ -13,7 +14,7 @@ export default function CommentPopup({ comment, onSave, onDelete, onClose }) {
   }, [comment]);
 
   const handleSave = () => {
-    if (text.trim() && text !== comment.text) {
+    if (text.trim() && text !== (comment.text || '')) {
       onSave(text);
     }
     onClose();
@@ -53,7 +54,7 @@ export default function CommentPopup({ comment, onSave, onDelete, onClose }) {
           padding: '6px',
           border: '1px solid #aaa',
         }}
-        placeholder="Edit comment..."
+        placeholder={isNew ? "Add a comment..." : "Edit comment..."}
       />
       <div
         style={{
@@ -63,26 +64,28 @@ export default function CommentPopup({ comment, onSave, onDelete, onClose }) {
           alignItems: 'center',
         }}
       >
-        <button
-          onClick={handleDelete}
-          style={{ fontSize: '13px', color: 'red' }}
-        >
-          Delete
-        </button>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        {!isNew && (
           <button
-  onClick={handleSave}
-  disabled={text.trim() === comment.text.trim()}
-  style={{
-    fontSize: '13px',
-    fontWeight: 'bold',
-    color: text.trim() === comment.text.trim() ? '#999' : 'green',
-    cursor: text.trim() === comment.text.trim() ? 'not-allowed' : 'pointer',
-    opacity: text.trim() === comment.text.trim() ? 0.5 : 1,
-  }}
->
-  Edit
-</button>
+            onClick={handleDelete}
+            style={{ fontSize: '13px', color: 'red' }}
+          >
+            Delete
+          </button>
+        )}
+        <div style={{ display: 'flex', gap: '8px', marginLeft: isNew ? 'auto' : 0 }}>
+          <button
+            onClick={handleSave}
+            disabled={text.trim() === (comment.text || '').trim()}
+            style={{
+              fontSize: '13px',
+              fontWeight: 'bold',
+              color: text.trim() === (comment.text || '').trim() ? '#999' : 'green',
+              cursor: text.trim() === (comment.text || '').trim() ? 'not-allowed' : 'pointer',
+              opacity: text.trim() === (comment.text || '').trim() ? 0.5 : 1,
+            }}
+          >
+            {isNew ? 'Add' : 'Edit'}
+          </button>
           <button
             onClick={onClose}
             style={{ fontSize: '13px' }}

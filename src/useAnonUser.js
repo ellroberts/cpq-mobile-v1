@@ -1,4 +1,3 @@
-// src/useAnonUser.js
 import { useMemo } from 'react';
 
 export function useAnonUser() {
